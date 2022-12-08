@@ -1,7 +1,8 @@
 FROM alpine:3.17.0
-RUN apk add --no-cache \
-    jq \
-    curl && \
+RUN apk upgrade --no-cache && \
+    apk add --no-cache \
+        jq \
+        curl && \
     addgroup -g 1000 kcrestart && \
     adduser -u 1000 -D -h /usr/app kcrestart -G kcrestart
 
