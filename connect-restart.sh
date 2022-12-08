@@ -4,7 +4,9 @@
 # CONNECT_URL="http://localhost:8083"
 connect_url=${CONNECT_URL:-http://localhost:8083}
 connect_url="${connect_url}/connectors"
-
+sleep_seconds="${RESTART_SLEEP_SECONDS:-900}"
+echo "Entering restart loop with sleep set to ${sleep_seconds} seconds"
+while true; do
 curl -fsSL \
     --retry 10 \
     --connect-timeout 60 \
@@ -34,4 +36,7 @@ while IFS= read -r task; do
             exit 1
         fi
     fi
+done
+echo "Sleeping ${sleep_seconds} seconds"
+sleep "$sleep_seconds"
 done
